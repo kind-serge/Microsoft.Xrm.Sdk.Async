@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Microsoft.CrmSdk.CoreAssemblies.Async</id>
+        <version>8.0.0.0</version>
+        <authors>Serge Semenov</authors>
+        <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+        <projectUrl>https://github.com/tyrotoxin/Microsoft.Xrm.Sdk.Async</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>When you call "IOrganizationService.Execute(request)" for instance, it blocks the current thread until the reply is received from the Dynamics CRM server. In case when multiple such operations are running in parallel the app will use too many worker threads (because they are blocked) and will start suffer from performance degradation due to thread exhaustion. To avoid this issue, it's better not to block threads and process server responses as soon as they are available. This extension library allows you to do this using Task Parrallel Library (TPL) and asynchronous calls to Dynamics CRM server, e.g. "await IAsyncOrganizationService.ExecuteAsync(request, cancellationToken)".
+
+Yo use you need to create an async version of the client: Microsoft.Xrm.Sdk.Client.Async.AsyncOrganizationServiceProxy, Microsoft.Xrm.Sdk.Client.Async.AsyncDiscoveryServiceProxy, Microsoft.Xrm.Sdk.WebServiceClient.Async.OrganizationWebProxyAsyncClient, Microsoft.Xrm.Sdk.WebServiceClient.Async.DiscoveryWebProxyAsyncClient.</description>
+        <summary>Adds IAsyncOrganizationService and IAsyncDiscoveryService with async versions of interface methods to the CRM Dynamics SDK</summary>
+        <tags>Dynamics 2016 CRM SDK XRM async</tags>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Microsoft.CrmSdk.CoreAssemblies" version="8.0.2.1" />
+                <dependency id="Microsoft.IdentityModel" version="6.1.7600.16394" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.dll" target="lib\net452\Microsoft.Xrm.Sdk.Async.dll" />
+        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.XML" target="lib\net452\Microsoft.Xrm.Sdk.Async.XML" />
+    </files>
+</package>
