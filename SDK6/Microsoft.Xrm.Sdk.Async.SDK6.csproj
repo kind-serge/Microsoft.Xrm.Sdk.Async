@@ -68,6 +68,9 @@
     <Compile Include="..\Common\AsyncCallOperation.cs">
       <Link>Common\AsyncCallOperation.cs</Link>
     </Compile>
+    <Compile Include="..\Common\AsyncServiceConfigurationFactory.cs">
+      <Link>Common\AsyncServiceConfigurationFactory.cs</Link>
+    </Compile>
     <Compile Include="..\Common\KnownAssemblyAttribute.cs">
       <Link>Common\KnownAssemblyAttribute.cs</Link>
     </Compile>
