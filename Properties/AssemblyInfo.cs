@@ -15,8 +15,8 @@ using System.Runtime.InteropServices;
 [assembly: Guid("2ad885d6-2eb9-483e-bf6e-e2f860964a88")]
 
 #if SDK6
-[assembly: AssemblyVersion("6.0.1.0")]
-[assembly: AssemblyFileVersion("6.0.1.0")]
+[assembly: AssemblyVersion("6.0.2.0")]
+[assembly: AssemblyFileVersion("6.0.2.0")]
 #endif
 
 #if SDK7
