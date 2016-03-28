@@ -3,6 +3,9 @@ using Microsoft.Xrm.Sdk.Async;
 
 namespace Microsoft.Xrm.Sdk.Client.Async
 {
+    /// <summary>
+    /// Extension methods for OrganizationServiceProxy class
+    /// </summary>
     public static class OrganizationServiceProxyExtensions
     {
         private static readonly Type OrganizationServiceConfigurationType = typeof(OrganizationServiceProxy).Assembly.GetType("Microsoft.Xrm.Sdk.Client.OrganizationServiceConfiguration");
@@ -14,6 +17,10 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         }
 
 
+        /// <summary>
+        /// Converts to asynchronous proxy (if possible)
+        /// </summary>
+        /// <param name="service">The synchronous proxy</param>
         public static AsyncOrganizationServiceProxy ToAsyncService(this OrganizationServiceProxy service)
         {
             if (!OrganizationServiceConfigurationType.IsAssignableFrom(service.ServiceConfiguration.GetType()))

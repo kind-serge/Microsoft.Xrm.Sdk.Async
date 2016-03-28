@@ -2,8 +2,15 @@
 
 namespace Microsoft.Xrm.Sdk.WebServiceClient.Async
 {
+    /// <summary>
+    /// Extension methods for OrganizationWebProxyClient class
+    /// </summary>
     public static class OrganizationWebProxyClientExtensions
     {
+        /// <summary>
+        /// Creates asynchronous proxy (if possible)
+        /// </summary>
+        /// <param name="client">The synchronous proxy</param>
         public static OrganizationWebProxyAsyncClient ToAsyncClient(this OrganizationWebProxyClient client)
         {
             var asyncClient = new OrganizationWebProxyAsyncClient(client.Endpoint.Address.Uri, client.Endpoint.Binding.SendTimeout, useStrongTypes: false);

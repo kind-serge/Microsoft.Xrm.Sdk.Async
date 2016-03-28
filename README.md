@@ -107,5 +107,7 @@ You just need to create the asyncronous version of the client which exposes the 
 ## References
 
 GitHub: https://github.com/tyrotoxin/Microsoft.Xrm.Sdk.Async
+
 NuGet.org: https://www.nuget.org/packages/Microsoft.CrmSdk.CoreAssemblies.Async
+
 License: https://opensource.org/licenses/MIT

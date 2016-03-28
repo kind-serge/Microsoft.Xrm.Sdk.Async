@@ -3,6 +3,9 @@ using Microsoft.Xrm.Sdk.Async;
 
 namespace Microsoft.Xrm.Sdk.Client.Async
 {
+    /// <summary>
+    /// Extension methods for DiscoveryServiceProxy class
+    /// </summary>
     public static class DiscoveryServiceProxyExtensions
     {
         private static readonly Type DiscoveryServiceConfigurationType = typeof(DiscoveryServiceProxy).Assembly.GetType("Microsoft.Xrm.Sdk.Client.DiscoveryServiceConfiguration");
@@ -14,6 +17,10 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         }
 
 
+        /// <summary>
+        /// Creates the async version of the service
+        /// </summary>
+        /// <param name="service">Synchronous service proxy</param>
         public static AsyncDiscoveryServiceProxy ToAsyncService(this DiscoveryServiceProxy service)
         {
             if (!DiscoveryServiceConfigurationType.IsAssignableFrom(service.ServiceConfiguration.GetType()))
