@@ -25,7 +25,7 @@ GitHub project: https://github.com/tyrotoxin/Microsoft.Xrm.Sdk.Async
         </dependencies>
     </metadata>
     <files>
-        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.dll" target="lib\net452\Microsoft.Xrm.Sdk.Async.dll" />
-        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.XML" target="lib\net452\Microsoft.Xrm.Sdk.Async.XML" />
+        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.dll" target="lib\net45\Microsoft.Xrm.Sdk.Async.dll" />
+        <file src="bin\Release\Microsoft.Xrm.Sdk.Async.XML" target="lib\net45\Microsoft.Xrm.Sdk.Async.XML" />
     </files>
 </package>
