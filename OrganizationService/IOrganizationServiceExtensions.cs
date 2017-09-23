@@ -20,14 +20,12 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The synchronous service</param>
         public static IAsyncOrganizationService ToAsyncService(this IOrganizationService service)
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService;
 
 #if SDK7AtLeast
 
-            var webClient = service as OrganizationWebProxyClient;
-            if (webClient != null)
+            if (service is OrganizationWebProxyClient webClient)
                 return webClient.ToAsyncClient();
 
 #endif
@@ -42,13 +40,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task<Guid> CreateAsync(this IOrganizationService service, Entity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.CreateAsync(entity, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task<Guid>.Factory.FromAsync(wcfAsyncService.BeginCreate, wcfAsyncService.EndCreate, entity, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task<Guid>.Factory.FromAsync(wcfAsyncService.BeginCreate, wcfAsyncService.EndCreate, entity, state: null);
 
             return Task.Run(() => service.Create(entity));
         }
@@ -59,13 +55,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task UpdateAsync(this IOrganizationService service, Entity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.UpdateAsync(entity, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task.Factory.FromAsync(wcfAsyncService.BeginUpdate, wcfAsyncService.EndUpdate, entity, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task.Factory.FromAsync(wcfAsyncService.BeginUpdate, wcfAsyncService.EndUpdate, entity, state: null);
 
             return Task.Run(() => service.Update(entity));
         }
@@ -77,13 +71,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task DeleteAsync(this IOrganizationService service, string entityName, Guid id, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.DeleteAsync(entityName, id, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task.Factory.FromAsync(wcfAsyncService.BeginDelete, wcfAsyncService.EndDelete, entityName, id, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task.Factory.FromAsync(wcfAsyncService.BeginDelete, wcfAsyncService.EndDelete, entityName, id, state: null);
 
             return Task.Run(() => service.Delete(entityName, id));
         }
@@ -97,13 +89,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task AssociateAsync(this IOrganizationService service, string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.AssociateAsync(entityName, entityId, relationship, relatedEntities, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task.Factory.FromAsync((callback, state) => wcfAsyncService.BeginAssociate(entityName, entityId, relationship, relatedEntities, callback, state), wcfAsyncService.EndAssociate, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task.Factory.FromAsync((callback, state) => wcfAsyncService.BeginAssociate(entityName, entityId, relationship, relatedEntities, callback, state), wcfAsyncService.EndAssociate, state: null);
 
             return Task.Run(() => service.Associate(entityName, entityId, relationship, relatedEntities));
         }
@@ -117,13 +107,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task DisassociateAsync(this IOrganizationService service, string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.DisassociateAsync(entityName, entityId, relationship, relatedEntities, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task.Factory.FromAsync((callback, state) => wcfAsyncService.BeginDisassociate(entityName, entityId, relationship, relatedEntities, callback, state), wcfAsyncService.EndDisassociate, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task.Factory.FromAsync((callback, state) => wcfAsyncService.BeginDisassociate(entityName, entityId, relationship, relatedEntities, callback, state), wcfAsyncService.EndDisassociate, state: null);
 
             return Task.Run(() => service.Disassociate(entityName, entityId, relationship, relatedEntities));
         }
@@ -138,13 +126,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task<Entity> RetrieveAsync(this IOrganizationService service, string entityName, Guid id, ColumnSet columnSet, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.RetrieveAsync(entityName, id, columnSet, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task<Entity>.Factory.FromAsync(wcfAsyncService.BeginRetrieve, wcfAsyncService.EndRetrieve, entityName, id, columnSet, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task<Entity>.Factory.FromAsync(wcfAsyncService.BeginRetrieve, wcfAsyncService.EndRetrieve, entityName, id, columnSet, state: null);
 
             return Task.Run(() => service.Retrieve(entityName, id, columnSet));
         }
@@ -156,13 +142,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task<EntityCollection> RetrieveMultipleAsync(this IOrganizationService service, QueryBase query, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.RetrieveMultipleAsync(query, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task<EntityCollection>.Factory.FromAsync(wcfAsyncService.BeginRetrieveMultiple, wcfAsyncService.EndRetrieveMultiple, query, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task<EntityCollection>.Factory.FromAsync(wcfAsyncService.BeginRetrieveMultiple, wcfAsyncService.EndRetrieveMultiple, query, state: null);
 
             return Task.Run(() => service.RetrieveMultiple(query));
         }
@@ -174,13 +158,11 @@ namespace Microsoft.Xrm.Sdk.Async
         /// <param name="service">The service instance</param>
         public static Task<OrganizationResponse> ExecuteAsync(this IOrganizationService service, OrganizationRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncOrganizationService;
-            if (asyncService != null)
+            if (service is IAsyncOrganizationService asyncService)
                 return asyncService.ExecuteAsync(request, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncOrganizationService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task<OrganizationResponse>.Factory.FromAsync(wcfAsyncService.BeginExecute, wcfAsyncService.EndExecute, request, state: null));
+            if (service is IWcfAsyncOrganizationService wcfAsyncService)
+                return Task<OrganizationResponse>.Factory.FromAsync(wcfAsyncService.BeginExecute, wcfAsyncService.EndExecute, request, state: null);
 
             return Task.Run(() => service.Execute(request));
         }
