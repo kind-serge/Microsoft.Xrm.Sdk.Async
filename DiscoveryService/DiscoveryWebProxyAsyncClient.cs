@@ -91,6 +91,6 @@ namespace Microsoft.Xrm.Sdk.WebServiceClient.Async
         /// <param name="request">Type: <see cref="T:Microsoft.Xrm.Sdk.Discovery.DiscoveryRequest"></see>. A request instance that defines the action to be performed.</param>
         /// <param name="cancellationToken"></param>
         public Task<DiscoveryResponse> ExecuteAsync(DiscoveryRequest request, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task<DiscoveryResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null));
+            => Task<DiscoveryResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null);
     }
 }

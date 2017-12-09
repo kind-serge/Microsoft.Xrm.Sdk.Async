@@ -19,18 +19,15 @@ namespace Microsoft.Xrm.Sdk.Discovery.Async
         /// <param name="service">The synchronous service</param>
         public static IAsyncDiscoveryService ToAsyncService(this IDiscoveryService service)
         {
-            var asyncService = service as IAsyncDiscoveryService;
-            if (asyncService != null)
+            if (service is IAsyncDiscoveryService asyncService)
                 return asyncService;
 
-            var proxy = service as DiscoveryServiceProxy;
-            if (proxy != null)
+            if (service is DiscoveryServiceProxy proxy)
                 return proxy.ToAsyncService();
 
 #if SDK7AtLeast
 
-            var webClient = service as DiscoveryWebProxyClient;
-            if (webClient != null)
+            if (service is DiscoveryWebProxyClient webClient)
                 return webClient.ToAsyncClient();
 
 #endif
@@ -44,13 +41,11 @@ namespace Microsoft.Xrm.Sdk.Discovery.Async
         /// <param name="service">The service instance</param>
         public static Task<DiscoveryResponse> ExecuteAsync(this IDiscoveryService service, DiscoveryRequest request, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var asyncService = service as IAsyncDiscoveryService;
-            if (asyncService != null)
+            if (service is IAsyncDiscoveryService asyncService)
                 return asyncService.ExecuteAsync(request, cancellationToken);
 
-            var wcfAsyncService = service as IWcfAsyncDiscoveryService;
-            if (wcfAsyncService != null)
-                return Task.Run(async () => await Task<DiscoveryResponse>.Factory.FromAsync(wcfAsyncService.BeginExecute, wcfAsyncService.EndExecute, request, state: null));
+            if (service is IWcfAsyncDiscoveryService wcfAsyncService)
+                return Task<DiscoveryResponse>.Factory.FromAsync(wcfAsyncService.BeginExecute, wcfAsyncService.EndExecute, request, state: null);
 
             return Task.Run(() => service.Execute(request));
         }

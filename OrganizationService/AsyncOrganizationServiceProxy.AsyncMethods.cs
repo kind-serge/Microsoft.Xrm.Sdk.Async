@@ -40,7 +40,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entity">Type: <see cref="T:Microsoft.Xrm.Sdk.Entity"></see>. An entity instance that contains the properties to set in the newly created record.</param>
         /// <param name="cancellationToken"></param>
         public Task<Guid> CreateAsync(Entity entity, CancellationToken cancellationToken) =>
-            Task.Run(async () => await Task.Factory.FromAsync((callback, state) => BeginCreate(entity, callback, state, cancellationToken), EndCreate, state: null));
+            Task.Factory.FromAsync((callback, state) => BeginCreate(entity, callback, state, cancellationToken), EndCreate, state: null);
 
         #endregion
 
@@ -73,7 +73,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entity">Type: <see cref="T:Microsoft.Xrm.Sdk.Entity"></see>. An entity instance that has one or more properties set to be updated in the record.</param>
         /// <param name="cancellationToken"></param>
         public Task UpdateAsync(Entity entity, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task.Factory.FromAsync((callback, state) => BeginUpdate(entity, callback, state, cancellationToken), EndUpdate, state: null));
+            => Task.Factory.FromAsync((callback, state) => BeginUpdate(entity, callback, state, cancellationToken), EndUpdate, state: null);
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entityName">Type: Returns_String. The logical name of the entity that is specified in the entityId parameter.</param>
         /// <param name="cancellationToken"></param>
         public Task DeleteAsync(string entityName, Guid id, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task.Factory.FromAsync((callback, state) => BeginDelete(entityName, id, callback, state, cancellationToken), EndDelete, state: null));
+            => Task.Factory.FromAsync((callback, state) => BeginDelete(entityName, id, callback, state, cancellationToken), EndDelete, state: null);
 
         #endregion
 
@@ -147,7 +147,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entityId">Type: Returns_Guid. property_entityid to which the related records are associated.</param>
         /// <param name="cancellationToken"></param>
         public Task AssociateAsync(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task.Factory.FromAsync((callback, state) => BeginAssociate(entityName, entityId, relationship, relatedEntities, callback, state, cancellationToken), EndAssociate, state: null));
+            => Task.Factory.FromAsync((callback, state) => BeginAssociate(entityName, entityId, relationship, relatedEntities, callback, state, cancellationToken), EndAssociate, state: null);
 
         #endregion
 
@@ -186,7 +186,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entityId">Type: Returns_Guid. The ID of the record from which the related records are disassociated.</param>
         /// <param name="cancellationToken"></param>
         public Task DisassociateAsync(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task.Factory.FromAsync((callback, state) => BeginDisassociate(entityName, entityId, relationship, relatedEntities, callback, state, cancellationToken), EndDisassociate, state: null));
+            => Task.Factory.FromAsync((callback, state) => BeginDisassociate(entityName, entityId, relationship, relatedEntities, callback, state, cancellationToken), EndDisassociate, state: null);
 
         #endregion
 
@@ -227,7 +227,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="entityName">Type: Returns_String. The logical name of the entity that is specified in the entityId parameter.</param>
         /// <param name="cancellationToken"></param>
         public Task<Entity> RetrieveAsync(string entityName, Guid id, ColumnSet columnSet, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task<Entity>.Factory.FromAsync((callback, state) => BeginRetrieve(entityName, id, columnSet, callback, state, cancellationToken), EndRetrieve, state: null));
+            => Task<Entity>.Factory.FromAsync((callback, state) => BeginRetrieve(entityName, id, columnSet, callback, state, cancellationToken), EndRetrieve, state: null);
 
         #endregion
 
@@ -262,7 +262,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="query">Type: <see cref="T:Microsoft.Xrm.Sdk.Query.QueryBase"></see>. A query that determines the set of records to retrieve.</param>
         /// <param name="cancellationToken"></param>
         public Task<EntityCollection> RetrieveMultipleAsync(QueryBase query, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task<EntityCollection>.Factory.FromAsync((callback, state) => BeginRetrieveMultiple(query, callback, state, cancellationToken), EndRetrieveMultiple, state: null));
+            => Task<EntityCollection>.Factory.FromAsync((callback, state) => BeginRetrieveMultiple(query, callback, state, cancellationToken), EndRetrieveMultiple, state: null);
 
         #endregion
 
@@ -297,7 +297,7 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="request">Type: <see cref="T:Microsoft.Xrm.Sdk.OrganizationRequest"></see>. A request instance that defines the action to be performed.</param>
         /// <param name="cancellationToken"></param>
         public Task<OrganizationResponse> ExecuteAsync(OrganizationRequest request, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task<OrganizationResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null));
+            => Task<OrganizationResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null);
 
         #endregion
     }

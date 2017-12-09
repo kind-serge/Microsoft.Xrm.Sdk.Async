@@ -103,40 +103,57 @@ namespace Microsoft.Xrm.Sdk.Client.Async
         /// <param name="request">Type: <see cref="T:Microsoft.Xrm.Sdk.Discovery.DiscoveryRequest"></see>. A request instance that defines the action to be performed.</param>
         /// <param name="cancellationToken"></param>
         public Task<DiscoveryResponse> ExecuteAsync(DiscoveryRequest request, CancellationToken cancellationToken)
-            => Task.Run(async () => await Task<DiscoveryResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null));
+            => Task<DiscoveryResponse>.Factory.FromAsync((callback, state) => BeginExecute(request, callback, state, cancellationToken), EndExecute, state: null);
 
         private T TryRun<T>(Func<T> func, ref bool? retry)
         {
             bool forceClose = false;
-            try {
+            try
+            {
                 return func();
-            } catch (System.ServiceModel.Security.MessageSecurityException messageSecurityException) {
+            }
+            catch (System.ServiceModel.Security.MessageSecurityException messageSecurityException)
+            {
                 forceClose = true;
                 retry = base.ShouldRetry(messageSecurityException, retry);
-                if (!retry.GetValueOrDefault()) {
+                if (!retry.GetValueOrDefault())
+                {
                     throw;
                 }
-            } catch (System.ServiceModel.EndpointNotFoundException) {
+            }
+            catch (System.ServiceModel.EndpointNotFoundException)
+            {
                 forceClose = true;
                 retry = new bool?(base.HandleFailover(retry));
-                if (!retry.GetValueOrDefault()) {
+                if (!retry.GetValueOrDefault())
+                {
                     throw;
                 }
-            } catch (TimeoutException) {
+            }
+            catch (TimeoutException)
+            {
                 forceClose = true;
                 retry = new bool?(base.HandleFailover(retry));
-                if (!retry.GetValueOrDefault()) {
+                if (!retry.GetValueOrDefault())
+                {
                     throw;
                 }
-            } catch (System.ServiceModel.FaultException<OrganizationServiceFault> faultException) {
+            }
+            catch (System.ServiceModel.FaultException<OrganizationServiceFault> faultException)
+            {
                 forceClose = true;
                 retry = base.HandleFailover(faultException.Detail, retry);
-                if (!retry.GetValueOrDefault()) {
+                if (!retry.GetValueOrDefault())
+                {
                     throw;
                 }
-            } catch {
+            }
+            catch
+            {
                 forceClose = true;
-            } finally {
+            }
+            finally
+            {
                 this.CloseChannel(forceClose);
             }
 
@@ -148,7 +165,8 @@ namespace Microsoft.Xrm.Sdk.Client.Async
             T result = default(T);
 
             bool? retry = null;
-            do {
+            do
+            {
                 using (new DiscoveryServiceContextInitializer(this))
                     result = TryRun(func, ref retry);
             }
